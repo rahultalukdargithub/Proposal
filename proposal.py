@@ -8,6 +8,10 @@ st.set_page_config(
     layout="centered"
 )
 
+# ---------------- Session State ----------------
+if "response" not in st.session_state:
+    st.session_state.response = None
+
 # ---------------- Custom CSS ----------------
 st.markdown("""
 <style>
@@ -56,14 +60,16 @@ def type_text(text, delay=0.03):
     typed = ""
     for char in text:
         typed += char
-        placeholder.markdown(f"<div class='text'>{typed}</div>", unsafe_allow_html=True)
+        placeholder.markdown(
+            f"<div class='text'>{typed}</div>",
+            unsafe_allow_html=True
+        )
         time.sleep(delay)
 
 # ---------------- Header ----------------
 st.markdown("<div class='title'>Hey… ❤️</div>", unsafe_allow_html=True)
 st.markdown("<div class='subtitle'>I hope you read this slowly</div>", unsafe_allow_html=True)
 st.write("")
-
 time.sleep(1)
 
 # ---------------- Main Message ----------------
@@ -92,6 +98,12 @@ st.markdown("<div class='center'>✨ ✨ ✨</div>", unsafe_allow_html=True)
 st.write("")
 
 type_text(
+    "I can truly see myself with you. "
+    "And somewhere deep down, I feel that you might feel the same too."
+)
+
+st.write("")
+type_text(
     "I’m not here with promises of perfection. "
     "I’m just here with honesty."
 )
@@ -104,46 +116,57 @@ type_text(
 
 st.write("")
 type_text(
-    "So today, I wanted to ask you something — not to rush you, "
-    "not to pressure you — just to tell you how I feel."
+    "So today, I wanted to ask you something — "
+    "not to rush you, not to pressure you — "
+    "just to be honest about how I feel."
 )
 
 st.write("")
 st.write("")
 
 # ---------------- Proposal Question ----------------
-st.markdown("<div class='center question'>Would you like to be mine? ❤️</div>", unsafe_allow_html=True)
+st.markdown(
+    "<div class='center question'>Would you like to be mine? ❤️</div>",
+    unsafe_allow_html=True
+)
 st.write("")
 
-col1, col2 = st.columns(2)
+# ---------------- Buttons ----------------
+if st.session_state.response is None:
+    col1, col2 = st.columns(2)
 
-with col1:
-    yes = st.button("Yes, I feel the same 💖")
+    with col1:
+        if st.button("Yes, I feel the same 💖"):
+            st.session_state.response = "yes"
 
-with col2:
-    maybe = st.button("I need some time 🌸")
+    with col2:
+        if st.button("I need some time 🌸"):
+            st.session_state.response = "maybe"
 
 # ---------------- Response ----------------
-if yes:
+if st.session_state.response == "yes":
     st.balloons()
     st.markdown("""
     <div class='text center'>
-    You have no idea how happy this makes me.<br><br>
-    I promise to respect you, care for you, and always choose honesty.<br><br>
-    Whatever this becomes — I’m grateful it starts with you ❤️
+    You have no idea how much this means to me.<br><br>
+    I promise to respect you, care for you, and be genuine with you — always.<br><br>
+    Whatever this becomes, I’m really glad it starts with you ❤️
     </div>
     """, unsafe_allow_html=True)
 
-elif maybe:
+elif st.session_state.response == "maybe":
     st.markdown("""
     <div class='text center'>
-    And that’s perfectly okay ❤️<br><br>
+    That’s completely okay ❤️<br><br>
     Take all the time you need.<br>
-    My feelings aren’t going anywhere.
+    My feelings are patient and sincere.
     </div>
     """, unsafe_allow_html=True)
 
 # ---------------- Footer ----------------
 st.write("")
 st.write("")
-st.markdown("<div class='footer'>Made with sincerity, not shortcuts ✨</div>", unsafe_allow_html=True)
+st.markdown(
+    "<div class='footer'>Made with sincerity, not shortcuts ✨</div>",
+    unsafe_allow_html=True
+)
