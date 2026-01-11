@@ -159,26 +159,36 @@ st.markdown(
 st.write("")
 
 # ---------------- Buttons ----------------
-if st.session_state.response is None:
-    col1, col2 = st.columns(2)
+# if st.session_state.response is None:
+#     col1, col2 = st.columns(2)
 
-    with col1:
-        if st.button("Yes, I feel the same 💖"):
-            st.session_state.response = "yes"
+#     with col1:
+#         if st.button("Yes, I feel the same 💖"):
+#             st.session_state.response = "yes"
 
-    with col2:
-        if st.button("I need some time 🌸"):
-            st.session_state.response = "maybe"
+#     with col2:
+#         if st.button("I need some time 🌸"):
+#             st.session_state.response = "maybe"
+
+col1, col2 = st.columns(2)
+
+with col1:
+    yes = st.button("Yes, I feel the same 💖")
+
+with col2:
+    no = st.button("I need some time 🌸")
 
 # ---------------- Response Box ----------------
-if st.session_state.response == "yes":
+# if st.session_state.response == "yes":
+if yes:
     st.balloons()
     st.success(
     "You have no idea how happy this makes me ❤️\n\n"
     "I promise to be genuine, respectful, and present."
     "Whatever this becomes, I’m really glad it begins with you.")
 
-elif st.session_state.response == "maybe":
+# elif st.session_state.response == "maybe":
+elif no:    
     st.info(
     "That’s completely okay ❤️\n\n"
     "Take all the time you need."
