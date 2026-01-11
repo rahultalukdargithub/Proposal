@@ -1,5 +1,5 @@
 import streamlit as st
-from datetime import datetime
+import time
 
 # ---------------- Page Config ----------------
 st.set_page_config(
@@ -12,110 +12,138 @@ st.set_page_config(
 st.markdown("""
 <style>
 body {
-    background-color: #fff0f5;
+    background: linear-gradient(to bottom, #fff1f5, #fde2e4);
 }
-.main-title {
+.title {
     text-align: center;
-    font-size: 48px;
-    color: #e75480;
-    font-weight: bold;
+    font-size: 52px;
+    color: #d6336c;
+    font-weight: 700;
 }
 .subtitle {
     text-align: center;
     font-size: 22px;
     color: #555;
 }
-.section {
+.text {
     font-size: 20px;
-    line-height: 1.8;
+    line-height: 1.9;
     color: #333;
 }
-.heart {
+.center {
     text-align: center;
-    font-size: 40px;
 }
 .question {
-    text-align: center;
-    font-size: 32px;
-    color: #e75480;
-    font-weight: bold;
+    font-size: 34px;
+    color: #c9184a;
+    font-weight: 600;
 }
 .footer {
-    text-align: center;
-    font-size: 18px;
+    font-size: 16px;
     color: #777;
+    text-align: center;
+}
+button {
+    height: 3em;
+    font-size: 18px !important;
 }
 </style>
 """, unsafe_allow_html=True)
 
+# ---------------- Helper: Typewriter Effect ----------------
+def type_text(text, delay=0.03):
+    placeholder = st.empty()
+    typed = ""
+    for char in text:
+        typed += char
+        placeholder.markdown(f"<div class='text'>{typed}</div>", unsafe_allow_html=True)
+        time.sleep(delay)
+
 # ---------------- Header ----------------
-st.markdown("<div class='main-title'>Hey, My Love ❤️</div>", unsafe_allow_html=True)
-st.markdown("<div class='subtitle'>I made something special… just for you</div>", unsafe_allow_html=True)
-
-st.write("")
+st.markdown("<div class='title'>Hey… ❤️</div>", unsafe_allow_html=True)
+st.markdown("<div class='subtitle'>I hope you read this slowly</div>", unsafe_allow_html=True)
 st.write("")
 
-# ---------------- Story Section ----------------
-st.markdown("<div class='section'>", unsafe_allow_html=True)
-st.write(
-    "From the moment you walked into my life, things changed in the most beautiful way. "
-    "You became my calm in chaos, my smile on difficult days, and my favorite person without even trying."
+time.sleep(1)
+
+# ---------------- Main Message ----------------
+type_text(
+    "I don’t know when it happened. "
+    "Maybe it was during one of our random conversations, "
+    "or one of those quiet moments where nothing special was happening — yet everything felt right."
 )
-st.write(
-    "Every conversation, every laugh, every silent moment with you feels like home. "
-    "And today, I want to tell you something that my heart has known for a long time."
-)
-st.markdown("</div>", unsafe_allow_html=True)
 
 st.write("")
-st.markdown("<div class='heart'>💗 💗 💗</div>", unsafe_allow_html=True)
+type_text(
+    "Somehow, you became my favorite thought. "
+    "The person I want to tell things to first. "
+    "The calm I didn’t know I was looking for."
+)
+
+st.write("")
+type_text(
+    "With you, things feel lighter. "
+    "Smiles come easier. "
+    "And even ordinary days feel a little more beautiful."
+)
+
+st.write("")
+st.markdown("<div class='center'>✨ ✨ ✨</div>", unsafe_allow_html=True)
 st.write("")
 
-# ---------------- Memory Section ----------------
-st.markdown("<div class='section'>", unsafe_allow_html=True)
-st.write(
-    "I don’t promise perfection. But I promise effort. "
-    "I promise to stand by you, learn with you, grow with you, and choose you every single day."
+type_text(
+    "I’m not here with promises of perfection. "
+    "I’m just here with honesty."
 )
-st.write(
-    "Life will have ups and downs, but I want all of them — with you."
+
+st.write("")
+type_text(
+    "I like you. Not casually. Not temporarily. "
+    "But in a way that feels real, warm, and intentional."
 )
-st.markdown("</div>", unsafe_allow_html=True)
+
+st.write("")
+type_text(
+    "So today, I wanted to ask you something — not to rush you, "
+    "not to pressure you — just to tell you how I feel."
+)
 
 st.write("")
 st.write("")
 
 # ---------------- Proposal Question ----------------
-st.markdown("<div class='question'>Will you marry me? 💍</div>", unsafe_allow_html=True)
+st.markdown("<div class='center question'>Would you like to be mine? ❤️</div>", unsafe_allow_html=True)
 st.write("")
 
 col1, col2 = st.columns(2)
 
 with col1:
-    yes = st.button("Yes ❤️")
+    yes = st.button("Yes, I feel the same 💖")
 
 with col2:
-    no = st.button("Let me think 🙈")
+    maybe = st.button("I need some time 🌸")
 
 # ---------------- Response ----------------
 if yes:
     st.balloons()
-    st.success(
-        "You just made me the happiest person alive ❤️\n\n"
-        "I can’t wait to start this forever with you."
-    )
+    st.markdown("""
+    <div class='text center'>
+    You have no idea how happy this makes me.<br><br>
+    I promise to respect you, care for you, and always choose honesty.<br><br>
+    Whatever this becomes — I’m grateful it starts with you ❤️
+    </div>
+    """, unsafe_allow_html=True)
 
-elif no:
-    st.info(
-        "That’s okay ❤️\n\n"
-        "Take all the time you need. My heart is right here, waiting for you."
-    )
+elif maybe:
+    st.markdown("""
+    <div class='text center'>
+    And that’s perfectly okay ❤️<br><br>
+    Take all the time you need.<br>
+    My feelings aren’t going anywhere.
+    </div>
+    """, unsafe_allow_html=True)
 
 # ---------------- Footer ----------------
 st.write("")
 st.write("")
-today = datetime.now().strftime("%d %B %Y")
-st.markdown(
-    f"<div class='footer'>Made with all my love • {today}</div>",
-    unsafe_allow_html=True
-)
+st.markdown("<div class='footer'>Made with sincerity, not shortcuts ✨</div>", unsafe_allow_html=True)
