@@ -194,7 +194,7 @@ import time
 from pathlib import Path
 
 # ---------------- CONFIG ----------------
-PASSWORD = "onlyyou"   # change this
+PASSWORD = "khukumani"   # change this
 HER_NAME = "You"       # optional personalization
 
 # ---------------- PAGE SETUP ----------------
