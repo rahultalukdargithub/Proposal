@@ -173,22 +173,16 @@ if st.session_state.response is None:
 # ---------------- Response Box ----------------
 if st.session_state.response == "yes":
     st.balloons()
-    st.markdown("""
-    <div class='response-box center'>
-    You have no idea how happy this makes me ❤️<br><br>
-    I promise to be genuine, respectful, and present.<br><br>
-    Whatever this becomes, I’m really glad it begins with you.
-    </div>
-    """, unsafe_allow_html=True)
+    st.success(
+    "You have no idea how happy this makes me ❤️\n\n"
+    "I promise to be genuine, respectful, and present."
+    "Whatever this becomes, I’m really glad it begins with you.")
 
 elif st.session_state.response == "maybe":
-    st.markdown("""
-    <div class='response-box center'>
-    That’s completely okay ❤️<br><br>
-    Take all the time you need.<br>
-    My feelings are patient and sincere.
-    </div>
-    """, unsafe_allow_html=True)
+    st.info(
+    "That’s completely okay ❤️\n\n"
+    "Take all the time you need."
+    "My feelings are patient and sincere.")
 
 # ---------------- Footer ----------------
 st.write("")
