@@ -409,10 +409,29 @@ if st.session_state.show_secret:
     st.markdown("<hr>", unsafe_allow_html=True)
     st.markdown("<div class='title'>For You, Always ❤️</div>", unsafe_allow_html=True)
 
-    # Photos
-    photos = list(Path("photos").glob("*"))
+    from PIL import Image
+
+    image_extensions = [".jpg", ".jpeg", ".png", ".webp"]
+    photos = []
+    
+    photos_dir = Path("photos")
+    
+    if photos_dir.exists():
+        for p in photos_dir.iterdir():
+            if p.suffix.lower() in image_extensions:
+                try:
+                    Image.open(p)  # validate image
+                    photos.append(str(p))
+                except:
+                    pass  # skip invalid images safely
+    
     if photos:
-        st.image([str(p) for p in photos], caption=["A memory ❤️"] * len(photos))
+        st.image(photos, caption=["A memory ❤️"] * len(photos))
+    else:
+        st.markdown(
+            "<div class='text center'>Some memories are still loading… 💗</div>",
+            unsafe_allow_html=True
+        )
 
     # Letter
     st.markdown("""
