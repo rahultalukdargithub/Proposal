@@ -300,12 +300,43 @@ button {
 </style>
 """, unsafe_allow_html=True)
 
+
+
+
 # ---------------- FLOATING HEARTS ----------------
 for i in range(12):
     st.markdown(
         f"<div class='heart' style='left:{i*8}%; animation-delay:{i}s'>❤️</div>",
         unsafe_allow_html=True
     )
+
+
+
+# ---------------- MUSIC (plays once) ----------------
+import base64
+from pathlib import Path
+
+def autoplay_audio(file_path: str):
+    if not Path(file_path).exists():
+        return
+
+    with open(file_path, "rb") as f:
+        data = f.read()
+
+    b64 = base64.b64encode(data).decode()
+
+    st.markdown(
+        f"""
+        <audio autoplay loop>
+            <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
+        </audio>
+        """,
+        unsafe_allow_html=True
+    )
+
+
+# if Path("love_music.mp3").exists():
+#     st.audio("love_music.mp3", loop=True)
 
 # ---------------- PASSWORD LOCK ----------------
 if not st.session_state.unlocked:
@@ -315,11 +346,9 @@ if not st.session_state.unlocked:
         st.session_state.unlocked = True
         st.rerun()
     st.stop()
+    
 
-# ---------------- MUSIC (plays once) ----------------
-if Path("love_music.mp3").exists():
-    st.audio("love_music.mp3", loop=True)
-
+autoplay_audio("love_music.mp3")
 # ---------------- TYPEWRITER ----------------
 def type_text(text, delay=0.03):
     placeholder = st.empty()
@@ -334,39 +363,109 @@ st.markdown("<div class='title'>Hey… ❤️</div>", unsafe_allow_html=True)
 st.markdown("<div class='subtitle'>I wanted to say this, properly</div>", unsafe_allow_html=True)
 
 # ---------------- STORY ----------------
+# if not st.session_state.story_done:
+#     type_text(
+#         "I don’t know when it started. Maybe during one of our random conversations. "
+#         "Maybe during a quiet moment that didn’t seem important at the time."
+#     )
+#     st.write("")
+#     type_text(
+#         "But slowly, you became the person I look for in my day. "
+#         "The one I want to tell things to first."
+#     )
+#     st.write("")
+#     type_text(
+#         "With you, things feel lighter. Smiles come easier. "
+#         "Even ordinary days feel a little warmer."
+#     )
+#     st.write("")
+#     type_text(
+#         "I can truly see myself with you. "
+#         "And somewhere deep down, I feel that you might feel the same too."
+#     )
+#     st.write("")
+#     type_text(
+#         "I like you. Not casually. Not temporarily. "
+#         "But in a way that feels calm, real, and sincere."
+#     )
+#     st.session_state.story_done = True
+# else:
+#     st.markdown("""
+#     <div class='text'>
+#     I don’t know when it started, but you slowly became the person I look for in my day.
+#     With you, things feel lighter, calmer, and more real.
+#     </div>
+#     """, unsafe_allow_html=True)
+
+# ---------------- Story (Runs ONLY once) ----------------
 if not st.session_state.story_done:
     type_text(
-        "I don’t know when it started. Maybe during one of our random conversations. "
-        "Maybe during a quiet moment that didn’t seem important at the time."
+        "I don’t know when it happened. "
+        "Maybe it was during one of our random conversations, "
+        "or one of those quiet moments where nothing special was happening — yet everything felt right."
     )
+
     st.write("")
     type_text(
-        "But slowly, you became the person I look for in my day. "
-        "The one I want to tell things to first."
+        "Somehow, you became my favorite thought. "
+        "The person I want to tell things to first. "
+        "The calm I didn’t know I was looking for."
     )
+
     st.write("")
     type_text(
-        "With you, things feel lighter. Smiles come easier. "
-        "Even ordinary days feel a little warmer."
+        "With you, things feel lighter. "
+        "Smiles come easier. "
+        "And even ordinary days feel a little more beautiful."
     )
+
     st.write("")
+    st.markdown("<div class='center'>✨ ✨ ✨</div>", unsafe_allow_html=True)
+    st.write("")
+
     type_text(
         "I can truly see myself with you. "
         "And somewhere deep down, I feel that you might feel the same too."
     )
+
     st.write("")
     type_text(
         "I like you. Not casually. Not temporarily. "
-        "But in a way that feels calm, real, and sincere."
+        "But in a way that feels real, warm, and intentional."
     )
+
+    st.write("")
+    type_text(
+        "So today, I just wanted to be honest with you."
+    )
+
     st.session_state.story_done = True
+
 else:
+    # Static version (no typing, no delay)
     st.markdown("""
     <div class='text'>
-    I don’t know when it started, but you slowly became the person I look for in my day.
-    With you, things feel lighter, calmer, and more real.
+    I don’t know when it happened. Maybe it was during one of our random conversations,
+    or one of those quiet moments where nothing special was happening — yet everything felt right.<br><br>
+
+    Somehow, you became my favorite thought. The person I want to tell things to first.
+    The calm I didn’t know I was looking for.<br><br>
+
+    With you, things feel lighter. Smiles come easier.
+    And even ordinary days feel a little more beautiful.<br><br>
+
+    ✨ ✨ ✨<br><br>
+
+    I can truly see myself with you.
+    And somewhere deep down, I feel that you might feel the same too.<br><br>
+
+    I like you. Not casually. Not temporarily.
+    But in a way that feels real, warm, and intentional.<br><br>
+
+    So today, I just wanted to be honest with you.
     </div>
     """, unsafe_allow_html=True)
+
 
 # ---------------- QUESTION ----------------
 st.markdown("<div class='center question'>Would you like to be mine? ❤️</div>", unsafe_allow_html=True)
