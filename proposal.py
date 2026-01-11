@@ -247,15 +247,47 @@ body {
     margin-top: 40px;
 }
 
+# .response-box {
+#     background: rgba(255,255,255,0.8);
+#     backdrop-filter: blur(14px);
+#     padding: 35px;
+#     border-radius: 22px;
+#     box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+#     font-size: 20px;
+#     animation: fadeUp 1s ease;
+# }
+
 .response-box {
-    background: rgba(255,255,255,0.8);
-    backdrop-filter: blur(14px);
     padding: 35px;
     border-radius: 22px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
     font-size: 20px;
+    backdrop-filter: blur(14px);
     animation: fadeUp 1s ease;
 }
+
+/* Light mode */
+@media (prefers-color-scheme: light) {
+    .response-box {
+        background: rgba(255, 255, 255, 0.85);
+        color: #333;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+    }
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+    .response-box {
+        background: rgba(30, 30, 30, 0.75);
+        color: #f1f1f1;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    }
+}
+@media (prefers-color-scheme: dark) {
+    .heart {
+        opacity: 0.35;
+    }
+}
+
 
 .letter {
     font-family: 'Georgia', serif;
